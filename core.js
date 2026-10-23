@@ -16,7 +16,9 @@
 
   /* ---------- formatting ---------- */
   const pad = (n) => String(n).padStart(2, '0');
-  const money = (n) => S.currency + Number(n).toLocaleString(S.locale);
+  // Currency from config: AED / KWD / USD …, with the decimals that currency uses (KWD 3, USD 2, AED 0).
+  const moneyFmt = new Intl.NumberFormat('en-US', { style: 'currency', currency: S.currency, minimumFractionDigits: S.currencyDigits ?? 0, maximumFractionDigits: S.currencyDigits ?? 0 });
+  const money = (n) => moneyFmt.format(n);
   const iso = (d) => `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}`;
   const parseIso = (s) => { const [y, m, d] = s.split('-').map(Number); return new Date(y, m - 1, d); };
   const toMin = (t) => { const [h, m] = t.split(':').map(Number); return h * 60 + m; };
@@ -164,7 +166,11 @@
     return URL.createObjectURL(new Blob([body], { type: 'text/calendar' }));
   }
 
-  const waLink = (text) => `https://wa.me/${S.whatsapp}?text=${encodeURIComponent(text)}`;
+  // Gulf clients confirm on WhatsApp; leave whatsapp empty in config (US) and it falls back to SMS.
+  const tel = S.phone.replace(/[^+\d]/g, '');
+  const confirmLink = (text) => (S.whatsapp
+    ? `https://wa.me/${S.whatsapp}?text=${encodeURIComponent(text)}`
+    : `sms:${tel}?&body=${encodeURIComponent(text)}`);
 
   function ticket(el, { heading, note, start, minutes, rows, title, again = 'Make another booking' }) {
     const code = ref();
@@ -181,7 +187,7 @@
           ${rows.map(([k, v]) => `<div><dt>${esc(k)}</dt><dd>${esc(v)}</dd></div>`).join('')}
         </dl>
         <div class="ticket-actions">
-          <a class="btn btn-primary" href="${waLink(`Hi ${S.name}, confirming booking ${code}.\n${summary}`)}" target="_blank" rel="noopener">Confirm on WhatsApp</a>
+          <a class="btn btn-primary" href="${confirmLink(`Hi ${S.name}, confirming booking ${code}.\n${summary}`)}" target="_blank" rel="noopener">${S.whatsapp ? 'Confirm on WhatsApp' : 'Text us to confirm'}</a>
           <a class="btn btn-ghost" href="${ics({ title, start, minutes, details: `${code}\n${summary}` })}" download="${S.id}-${code}.ics">Add to calendar</a>
           <a class="btn btn-link" href="${location.pathname.split('/').pop() || 'index.html'}">${esc(again)}</a>
         </div>
@@ -336,8 +342,8 @@
           <a href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(`${S.name} ${a.lines.join(' ')}`)}" target="_blank" rel="noopener">Get directions</a></div>
         <div><h2>Hours</h2><ul class="plain">${S.hours.display.map((h) => `<li>${esc(h)}</li>`).join('')}</ul><p class="status" data-open-status></p></div>
         <div><h2>Contact</h2><ul class="plain">
-          <li><a href="tel:${S.phone.replace(/[^+\d]/g, '')}">${esc(S.phone)}</a></li>
-          <li><a href="https://wa.me/${S.whatsapp}" target="_blank" rel="noopener">WhatsApp us</a></li>
+          <li><a href="tel:${tel}">${esc(S.phone)}</a></li>
+          ${S.whatsapp ? `<li><a href="https://wa.me/${S.whatsapp}" target="_blank" rel="noopener">WhatsApp us</a></li>` : ''}
           ${S.email ? `<li><a href="mailto:${S.email}">${esc(S.email)}</a></li>` : ''}
           ${(S.social || []).map((s) => `<li><a href="${s.href}" target="_blank" rel="noopener">${esc(s.label)}</a></li>`).join('')}
         </ul></div>
@@ -346,8 +352,7 @@
     const st = openStatus();
     $$('[data-open-status]').forEach((el) => { el.textContent = st.text; el.dataset.open = st.open; });
     $$('[data-s]').forEach((el) => { const v = get(el.dataset.s); if (v != null) el.textContent = v; });
-    $$('[data-tel]').forEach((el) => { el.href = `tel:${S.phone.replace(/[^+\d]/g, '')}`; });
-    $$('[data-wa]').forEach((el) => { el.href = `https://wa.me/${S.whatsapp}`; });
+    $$('[data-tel]').forEach((el) => { el.href = `tel:${tel}`; });
 
     // Structured data for search engines and AI answer engines.
     const ld = document.createElement('script');
