@@ -310,6 +310,9 @@
   }
 
   /* ---------- page chrome ---------- */
+  // Logo: config.logoMark (inline SVG, %I% = first letter of the name) next to the name as a wordmark.
+  const brandHtml = () => S.logo || `${(S.logoMark || '').replace(/%I%/g, esc(S.name.trim()[0] || ''))}<span class="brand-name">${esc(S.name)}</span>`;
+
   function chrome() {
     // ?embed renders a page without header and footer, for live previews inside another page.
     if (new URLSearchParams(location.search).has('embed')) document.documentElement.classList.add('embed');
@@ -318,7 +321,7 @@
     document.body.insertAdjacentHTML('afterbegin', `
       <a class="skip" href="#main">Skip to content</a>
       <header class="site-head"><div class="wrap head-row">
-        <a class="brand" href="index.html" aria-label="${esc(S.name)}, home">${S.logo || esc(S.name)}</a>
+        <a class="brand" href="index.html" aria-label="${esc(S.name)}, home">${brandHtml()}</a>
         <button class="menu-btn" type="button" aria-expanded="false" aria-controls="site-nav"><span class="sr-only">Menu</span><i aria-hidden="true"></i></button>
         <nav id="site-nav" aria-label="Main"><ul>
           ${S.nav.map((n) => `<li><a href="${n.href}"${n.href === page ? ' aria-current="page"' : ''}>${esc(n.label)}</a></li>`).join('')}
@@ -337,7 +340,7 @@
     const a = S.address;
     document.body.insertAdjacentHTML('beforeend', `
       <footer class="site-foot"><div class="wrap foot-grid">
-        <div class="foot-brand"><p class="foot-name">${S.logo || esc(S.name)}</p><p>${esc(S.tagline)}</p></div>
+        <div class="foot-brand"><p class="foot-name">${brandHtml()}</p><p>${esc(S.tagline)}</p></div>
         <div><h2>Visit</h2><address>${a.lines.map(esc).join('<br>')}</address>
           <a href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(`${S.name} ${a.lines.join(' ')}`)}" target="_blank" rel="noopener">Get directions</a></div>
         <div><h2>Hours</h2><ul class="plain">${S.hours.display.map((h) => `<li>${esc(h)}</li>`).join('')}</ul><p class="status" data-open-status></p></div>

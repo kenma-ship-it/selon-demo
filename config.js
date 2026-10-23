@@ -36,6 +36,8 @@ window.SITE = {
     { href: 'index.html#stylists', label: 'Stylists' },
   ],
   cta: { href: 'book.html', label: 'Book' },
+  /* Logo mark: an arched mirror with the first letter of the name (%I%). */
+  logoMark: `<svg class="logo-mark" viewBox="0 0 36 44" aria-hidden="true"><path d="M2 43V19a16 16 0 0 1 32 0v24z" fill="currentColor"/><text x="18" y="36" text-anchor="middle" font-family="'Bodoni Moda',serif" font-style="italic" font-size="23" fill="var(--logo-cut,var(--bg))">%I%</text></svg>`,
 
   categories: [
     { id: 'hair', name: 'Hair', img: '1562322140-8baeececf3df', blurb: 'Cuts, blow-dries and treatments, finished the way you will actually wear it.' },
