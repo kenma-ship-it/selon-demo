@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Book an appointment</title>
+  <meta name="description" content="Choose services, a stylist and a time. Your booking reference arrives straight away, with a WhatsApp confirmation and a calendar invite.">
+  <meta name="theme-color" content="#f5f2f4">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..700;1,6..96,400..700&family=Manrope:wght@400;500;600;700&display=swap">
+  <link rel="stylesheet" href="core.css">
+  <link rel="stylesheet" href="theme.css">
+  <script src="config.js" defer></script>
+  <script src="core.js" defer></script>
+  <script src="app.js" defer></script>
+</head>
+<body data-page="book">
+<main id="main" class="wrap book-layout" data-wizard>
+  <div class="book-main">
+    <header class="page-head page-head-tight">
+      <h1>Book an appointment</h1>
+    </header>
+    <ol class="steps-nav" data-step-nav>
+      <li>Services</li><li>Stylist</li><li>Time</li><li>Your details</li>
+    </ol>
+
+    <form id="booking" novalidate>
+      <fieldset class="step" data-msg="Choose at least one service.">
+        <legend class="step-title">What are you coming in for?</legend>
+        <p class="step-lede">Pick one or several. We add up the time so the right chair is held.</p>
+        <div data-svc-picker></div>
+        <p class="step-error" aria-live="polite"></p>
+        <div class="step-actions"><button class="btn btn-primary" type="button" data-next>Choose a stylist</button></div>
+      </fieldset>
+
+      <fieldset class="step" hidden data-msg="Choose a stylist, or first available.">
+        <legend class="step-title">Who would you like?</legend>
+        <p class="step-lede">Stylists who don't do one of your services are greyed out.</p>
+        <div class="stylist-opts" data-stylist-picker></div>
+        <p class="step-error" aria-live="polite"></p>
+        <div class="step-actions">
+          <button class="btn btn-primary" type="button" data-next>Pick a time</button>
+          <button class="btn btn-link" type="button" data-back>Back</button>
+        </div>
+      </fieldset>
+
+      <fieldset class="step" hidden data-msg="Choose a day and a time.">
+        <legend class="step-title">When suits you?</legend>
+        <p class="step-lede" data-time-lede>Times shown are when your appointment starts.</p>
+        <div class="days" data-days></div>
+        <div data-times><p class="empty">Pick a day to see open times.</p></div>
+        <p class="step-error" aria-live="polite"></p>
+        <div class="step-actions">
+          <button class="btn btn-primary" type="button" data-next>Add your details</button>
+          <button class="btn btn-link" type="button" data-back>Back</button>
+        </div>
+      </fieldset>
+
+      <fieldset class="step" hidden>
+        <legend class="step-title">Where should we send the confirmation?</legend>
+        <p class="step-lede">We only use this to confirm or move your appointment.</p>
+        <div class="grid-2">
+          <label class="field"><span>Your name</span><input name="name" autocomplete="name" required minlength="2"></label>
+          <label class="field"><span>Mobile number</span><input name="phone" type="tel" autocomplete="tel" required pattern="[\d+ \(\)\-]{10,}" inputmode="tel"><small>For the WhatsApp confirmation</small></label>
+        </div>
+        <label class="field" style="margin-top:1rem"><span>Anything we should know? <small>(optional)</small></span><textarea name="notes" placeholder="Allergies, a photo of the look you want, sensitive scalp…"></textarea></label>
+        <p class="step-error" aria-live="polite"></p>
+        <div class="step-actions">
+          <button class="btn btn-primary" type="submit">Confirm booking</button>
+          <button class="btn btn-link" type="button" data-back>Back</button>
+        </div>
+      </fieldset>
+    </form>
+    <div data-confirm hidden></div>
+  </div>
+
+  <aside class="summary" aria-label="Your appointment" data-summary>
+    <h2>Your appointment</h2>
+    <ul class="plain sum-list" data-sum-list><li class="muted">No services yet</li></ul>
+    <dl class="sum-meta">
+      <div><dt>Stylist</dt><dd data-sum-stylist>Not chosen</dd></div>
+      <div><dt>When</dt><dd data-sum-when>Not chosen</dd></div>
+      <div><dt>Time in chair</dt><dd data-sum-time>0 min</dd></div>
+    </dl>
+    <p class="sum-total"><span>Total</span><b data-sum-total>₹0</b></p>
+    <p class="sum-note">Pay at the studio. Free to move up to 6 hours before.</p>
+  </aside>
+</main>
+</body>
+</html>

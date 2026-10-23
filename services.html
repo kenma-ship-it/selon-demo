@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Services and prices</title>
+  <meta name="description" content="Every hair, colour, skin, nail and bridal service with its time and price. Pick one and book a stylist online.">
+  <meta name="theme-color" content="#f5f2f4">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..700;1,6..96,400..700&family=Manrope:wght@400;500;600;700&display=swap">
+  <link rel="stylesheet" href="core.css">
+  <link rel="stylesheet" href="theme.css">
+  <script src="config.js" defer></script>
+  <script src="core.js" defer></script>
+  <script src="app.js" defer></script>
+</head>
+<body data-page="services">
+<main id="main">
+  <header class="page-head wrap">
+    <h1>Services and prices</h1>
+    <p>Prices include consultation and finish. Times are how long you are in the chair, so you can plan the rest of your day.</p>
+  </header>
+
+  <nav class="cat-tabs" aria-label="Service categories"><div class="wrap" data-cat-tabs></div></nav>
+
+  <div class="wrap" data-service-menu></div>
+
+  <aside class="pick-bar" data-pick-bar hidden>
+    <div class="wrap pick-row">
+      <p data-pick-summary></p>
+      <a class="btn btn-primary" data-pick-go href="book.html">Book these</a>
+    </div>
+  </aside>
+</main>
+</body>
+</html>

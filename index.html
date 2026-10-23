@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Hair, colour and skin studio</title>
+  <meta name="description" content="Hair, colour, skin, nails and bridal by appointment. See services and prices, choose your stylist and book a time online.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?auto=format&fit=crop&w=1200&q=75">
+  <meta name="theme-color" content="#f5f2f4">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://images.unsplash.com">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..700;1,6..96,400..700&family=Manrope:wght@400;500;600;700&display=swap">
+  <link rel="stylesheet" href="core.css">
+  <link rel="stylesheet" href="theme.css">
+  <script src="config.js" defer></script>
+  <script src="core.js" defer></script>
+  <script src="app.js" defer></script>
+</head>
+<body data-page="home">
+<main id="main">
+
+  <section class="hero wrap" aria-labelledby="hero-title">
+    <div class="hero-copy">
+      <h1 id="hero-title" class="hero-name" data-s="name">Maison Noor</h1>
+      <p class="hero-lede">Hair, colour and skin, by appointment in <span data-s="address.lines.1">Indiranagar</span>. Choose your stylist, see the price before you arrive.</p>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="book.html">Book an appointment</a>
+        <a class="btn btn-ghost" href="services.html">Services and prices</a>
+      </div>
+      <p class="next-chair" data-next-chair hidden></p>
+    </div>
+    <div class="hero-art" aria-hidden="true">
+      <div class="arch arch-main"><img src="https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?auto=format&fit=crop&w=900&h=1300&q=75" width="900" height="1300" alt="" fetchpriority="high"></div>
+      <div class="arch arch-small"><img src="https://images.unsplash.com/photo-1580618672591-eb180b1a973f?auto=format&fit=crop&w=500&h=700&q=75" width="500" height="700" alt=""></div>
+      <svg class="hero-ring" viewBox="0 0 200 200"><defs><path id="ring" d="M100 100m-78 0a78 78 0 1 1 156 0a78 78 0 1 1-156 0"/></defs><text><textPath href="#ring" data-ring>hair, colour, skin, nails, bridal, by appointment,</textPath></text></svg>
+    </div>
+  </section>
+
+  <section class="menu-sec" aria-labelledby="menu-title">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2 id="menu-title">What we do</h2>
+        <p>Hover a line to see the work. Open it for every service, with times and prices.</p>
+      </div>
+      <ul class="cat-list" data-cat-list></ul>
+    </div>
+    <div class="cat-peek" aria-hidden="true"><img alt=""></div>
+  </section>
+
+  <section class="stylists-sec" id="stylists" aria-labelledby="stylists-title">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2 id="stylists-title">The people holding the scissors</h2>
+        <p>Book a named stylist, or take the first free chair. Either way you see their specialties first.</p>
+      </div>
+      <ul class="stylist-grid" data-stylists></ul>
+    </div>
+  </section>
+
+  <section class="quotes-sec" aria-labelledby="quotes-title">
+    <div class="wrap">
+      <h2 id="quotes-title" class="sr-only">What guests say</h2>
+      <div class="quote-track" data-quotes></div>
+    </div>
+  </section>
+
+  <section class="visit-sec" aria-labelledby="visit-title">
+    <div class="wrap visit-grid">
+      <figure class="visit-img"><img src="https://images.unsplash.com/photo-1633681926022-84c23e8cb2d6?auto=format&fit=crop&w=1400&q=75" width="1400" height="934" alt="The studio floor with styling chairs and mirrors" loading="lazy"></figure>
+      <div class="visit-copy">
+        <h2 id="visit-title">Find the studio</h2>
+        <address data-address></address>
+        <p class="status" data-open-status></p>
+        <ul class="plain visit-hours" data-hours></ul>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="book.html">Book a time</a>
+          <a class="btn btn-ghost" data-tel href="tel:">Call the studio</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+</body>
+</html>
